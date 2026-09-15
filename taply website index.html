@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Tap2Review — NFC Google Review Cards for businesses and a complete system to start your own NFC review business.">
+<meta name="theme-color" content="#050505">
+
+<title>Tap2Review — Turn Customers Into Reviews</title>
+
+<style>
+/* =========================
+   TAP2REVIEW
+   Single-file GitHub Pages Website
+   ========================= */
+
+:root{
+    --bg:#050505;
+    --bg2:#0b0b0b;
+    --card:#111111;
+    --card2:#151515;
+    --white:#ffffff;
+    --muted:#a7a7a7;
+    --red:#ff3030;
+    --red2:#ff5555;
+    --gold:#ffd84d;
+    --green:#25d366;
+    --border:rgba(255,255,255,.09);
+    --shadow:0 20px 70px rgba(0,0,0,.45);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Inter,Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at 80% 10%,rgba(255,40,40,.13),transparent 28%),
+        radial-gradient(circle at 10% 40%,rgba(255,0,0,.06),transparent 25%),
+        var(--bg);
+    color:var(--white);
+    line-height:1.6;
+    overflow-x:hidden;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+.container{
+    width:min(1120px,92%);
+    margin:auto;
+}
+
+/* NAVBAR */
+
+nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+    backdrop-filter:blur(18px);
+    background:rgba(5,5,5,.72);
+    border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.nav-inner{
+    height:72px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:900;
+    font-size:20px;
+    letter-spacing:-.7px;
+}
+
+.logo-icon{
+    width:35px;
+    height:35px;
+    border-radius:10px;
+    display:grid;
+    place-items:center;
+    background:linear-gradient(135deg,#fff,#777);
+    color:#050505;
+    font-weight:1000;
+    box-shadow:0 0 25px rgba(255,255,255,.12);
+}
+
+.logo span{
+    color:#fff;
+}
+
+.logo b{
+    color:var(--red);
+}
+
+.nav-btn{
+    padding:9px 17px;
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:100px;
+    font-size:13px;
+    font-weight:700;
+    transition:.3s;
+}
+
+.nav-btn:hover{
+    background:#fff;
+    color:#000;
+}
+
+/* HERO */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding:130px 0 80px;
+    position:relative;
+}
+
+.hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:50px;
+    align-items:center;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 14px;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:100px;
+    background:rgba(255,255,255,.035);
+    color:#ddd;
+    font-size:12px;
+    margin-bottom:22px;
+}
+
+.dot{
+    width:7px;
+    height:7px;
+    background:#25d366;
+    border-radius:50%;
+    box-shadow:0 0 12px #25d366;
+}
+
+h1{
+    font-size:clamp(48px,7vw,82px);
+    line-height:.96;
+    letter-spacing:-4px;
+    margin-bottom:25px;
+}
+
+.gradient-text{
+    background:linear-gradient(90deg,#fff,#ff4545);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    color:var(--muted);
+    max-width:590px;
+    font-size:18px;
+    margin-bottom:30px;
+}
+
+.buttons{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:15px 23px;
+    border-radius:12px;
+    font-weight:800;
+    font-size:14px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    transition:.3s;
+    cursor:pointer;
+    border:none;
+}
+
+.btn-red{
+    background:linear-gradient(135deg,#ff2020,#b90000);
+    box-shadow:0 10px 35px rgba(255,0,0,.22);
+}
+
+.btn-red:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 45px rgba(255,0,0,.35);
+}
+
+.btn-outline{
+    border:1px solid rgba(255,255,255,.14);
+    background:rgba(255,255,255,.03);
+}
+
+.btn-outline:hover{
+    background:#fff;
+    color:#000;
+}
+
+/* PHONE / CARD VISUAL */
+
+.visual{
+    min-height:470px;
+    display:grid;
+    place-items:center;
+    position:relative;
+}
+
+.phone{
+    width:245px;
+    height:455px;
+    border:8px solid #202020;
+    border-radius:38px;
+    background:#090909;
+    box-shadow:
+        0 40px 100px rgba(0,0,0,.8),
+        0 0 80px rgba(255,30,30,.13);
+    position:relative;
+    transform:rotate(5deg);
+    animation:float 4s ease-in-out infinite;
+    overflow:hidden;
+}
+
+@keyframes float{
+    0%,100%{transform:rotate(5deg) translateY(0)}
+    50%{transform:rotate(3deg) translateY(-13px)}
+}
+
+.phone-top{
+    width:80px;
+    height:22px;
+    background:#000;
+    border-radius:0 0 16px 16px;
+    position:absolute;
+    top:0;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:2;
+}
+
+.screen{
+    height:100%;
+    padding:55px 17px 20px;
+    background:
+        radial-gradient(circle at 50% 25%,rgba(255,40,40,.22),transparent 30%),
+        #0b0b0b;
+}
+
+.google{
+    font-size:20px;
+    font-weight:900;
+    margin-bottom:25px;
+}
+
+.stars{
+    color:var(--gold);
+    letter-spacing:3px;
+    font-size:19px;
+}
+
+.review-box{
+    background:#151515;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:15px;
+    padding:20px;
+    margin-top:25px;
+}
+
+.review-box small{
+    color:#999;
+}
+
+.review-box h3{
+    margin-top:8px;
+}
+
+.tap-card{
+    position:absolute;
+    width:220px;
+    height:125px;
+    background:linear-gradient(135deg,#171717,#050505);
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:18px;
+    padding:20px;
+    left:0;
+    bottom:45px;
+    transform:rotate(-13deg);
+    box-shadow:0 25px 70px rgba(0,0,0,.7);
+}
+
+.tap-card:after{
+    content:"";
+    position:absolute;
+    right:20px;
+    top:20px;
+    width:38px;
+    height:38px;
+    border:2px solid #fff;
+    border-radius:50%;
+    opacity:.7;
+}
+
+.tap-card h3{
+    font-size:16px;
+}
+
+.tap-card p{
+    color:#888;
+    font-size:11px;
+    margin-top:4px;
+}
+
+/* TRUST */
+
+.trust{
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+    padding:24px 0;
+    text-align:center;
+    color:#777;
+    font-size:13px;
+}
+
+/* GENERAL SECTIONS */
+
+section{
+    padding:105px 0;
+}
+
+.section-label{
+    color:var(--red2);
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:12px;
+}
+
+.section-title{
+    font-size:clamp(34px,5vw,55px);
+    line-height:1.05;
+    letter-spacing:-2px;
+    margin-bottom:18px;
+}
+
+.section-subtitle{
+    color:var(--muted);
+    max-width:650px;
+    margin-bottom:45px;
+}
+
+/* PROBLEM */
+
+.problem-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+}
+
+.card{
+    background:linear-gradient(145deg,#111,#0b0b0b);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:28px;
+    transition:.35s;
+}
+
+.card:hover{
+    transform:translateY(-7px);
+    border-color:rgba(255,50,50,.35);
+}
+
+.card-icon{
+    font-size:28px;
+    margin-bottom:20px;
+}
+
+.card h3{
+    margin-bottom:9px;
+}
+
+.card p{
+    color:#999;
+    font-size:14px;
+}
+
+/* HOW */
+
+.steps{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+}
+
+.step-number{
+    font-size:13px;
+    color:var(--red);
+    font-weight:900;
+    margin-bottom:25px;
+}
+
+/* FOR YOU */
+
+.for-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.for-box{
+    padding:35px;
+    border-radius:24px;
+    border:1px solid var(--border);
+    background:#0d0d0d;
+}
+
+.for-box.good{
+    box-shadow:inset 0 0 80px rgba(255,0,0,.04);
+}
+
+.for-box h3{
+    margin-bottom:18px;
+}
+
+.for-box li{
+    list-style:none;
+    margin:13px 0;
+    color:#aaa;
+}
+
+.for-box.good li:before{
+    content:"✓";
+    color:#39d98a;
+    margin-right:10px;
+}
+
+.for-box:not(.good) li:before{
+    content:"×";
+    color:#ff5555;
+    margin-right:10px;
+}
+
+/* PRICING */
+
+.pricing-grid{
+    display:grid;
+    grid-template-columns:1fr 1.08fr;
+    gap:20px;
+    align-items:stretch;
+}
+
+.price-card{
+    background:#0e0e0e;
+    border:1px solid var(--border);
+    border-radius:25px;
+    padding:35px;
+    position:relative;
+}
+
+.price-card.featured{
+    border-color:rgba(255,50,50,.5);
+    box-shadow:0 0 70px rgba(255,0,0,.08);
+}
+
+.popular{
+    position:absolute;
+    top:18px;
+    right:18px;
+    background:var(--red);
+    color:#fff;
+    font-size:10px;
+    padding:6px 10px;
+    border-radius:100px;
+    font-weight:900;
+}
+
+.price{
+    font-size:47px;
+    font-weight:900;
+    letter-spacing:-2px;
+    margin:15px 0 5px;
+}
+
+.price small{
+    font-size:13px;
+    color:#888;
+    font-weight:400;
+}
+
+.price-card p{
+    color:#999;
+    font-size:14px;
+}
+
+.features{
+    margin:25px 0;
+}
+
+.features li{
+    list-style:none;
+    margin:11px 0;
+    color:#bbb;
+    font-size:14px;
+}
+
+.features li:before{
+    content:"✓";
+    color:#39d98a;
+    font-weight:900;
+    margin-right:9px;
+}
+
+/* BUSINESS PACKAGE */
+
+.business{
+    background:
+        radial-gradient(circle at 80% 20%,rgba(255,20,20,.14),transparent 30%),
+        #0b0b0b;
+    border:1px solid rgba(255,50,50,.2);
+    border-radius:30px;
+    padding:50px;
+    overflow:hidden;
+    position:relative;
+}
+
+.business:before{
+    content:"";
+    position:absolute;
+    width:300px;
+    height:300px;
+    background:rgba(255,0,0,.08);
+    filter:blur(90px);
+    right:-100px;
+    top:-100px;
+}
+
+.business-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+    position:relative;
+}
+
+.business h2{
+    font-size:clamp(34px,5vw,57px);
+    line-height:1;
+    letter-spacing:-2px;
+    margin-bottom:20px;
+}
+
+.business p{
+    color:#aaa;
+}
+
+.business-features{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.business-feature{
+    padding:15px;
+    border-radius:13px;
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.06);
+    font-size:13px;
+}
+
+.business-feature span{
+    color:#ff5555;
+    margin-right:7px;
+}
+
+/* PROCESS */
+
+.process{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
+}
+
+.process-item{
+    text-align:center;
+    padding:25px 12px;
+    border:1px solid var(--border);
+    border-radius:18px;
+    background:#0d0d0d;
+}
+
+.process-item strong{
+    display:block;
+    margin:10px 0 4px;
+}
+
+.process-item small{
+    color:#777;
+}
+
+/* FAQ */
+
+.faq{
+    max-width:800px;
+    margin:auto;
+}
+
+details{
+    background:#0e0e0e;
+    border:1px solid var(--border);
+    border-radius:15px;
+    margin-bottom:10px;
+    padding:19px 22px;
+}
+
+summary{
+    cursor:pointer;
+    font-weight:800;
+}
+
+details p{
+    color:#999;
+    padding-top:14px;
+    font-size:14px;
+}
+
+/* ORDER */
+
+.order{
+    max-width:800px;
+    margin:auto;
+}
+
+.order-box{
+    background:#101010;
+    border:1px solid var(--border);
+    border-radius:25px;
+    padding:35px;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+label{
+    display:block;
+    font-size:12px;
+    color:#999;
+    margin-bottom:6px;
+}
+
+input,select,textarea{
+    width:100%;
+    padding:14px;
+    background:#080808;
+    color:#fff;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:11px;
+    outline:none;
+}
+
+input:focus,select:focus,textarea:focus{
+    border-color:rgba(255,50,50,.6);
+}
+
+.payment{
+    margin:20px 0;
+    padding:20px;
+    border-radius:15px;
+    background:#090909;
+    border:1px solid rgba(255,255,255,.07);
+}
+
+.payment strong{
+    color:#fff;
+}
+
+.payment p{
+    color:#999;
+    font-size:13px;
+    margin-top:5px;
+}
+
+/* CTA */
+
+.final-cta{
+    text-align:center;
+    padding:120px 0;
+}
+
+.final-cta h2{
+    font-size:clamp(40px,7vw,75px);
+    letter-spacing:-4px;
+    line-height:1;
+    margin-bottom:22px;
+}
+
+.final-cta p{
+    color:#999;
+    max-width:550px;
+    margin:0 auto 28px;
+}
+
+/* FOOTER */
+
+footer{
+    border-top:1px solid var(--border);
+    padding:30px 0;
+    color:#666;
+    font-size:12px;
+}
+
+.footer-inner{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+}
+
+/* WHATSAPP */
+
+.whatsapp{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:#25d366;
+    display:grid;
+    place-items:center;
+    font-size:25px;
+    z-index:900;
+    box-shadow:0 10px 35px rgba(37,211,102,.25);
+    transition:.3s;
+}
+
+.whatsapp:hover{
+    transform:scale(1.1);
+}
+
+/* REVEAL */
+
+.reveal{
+    opacity:0;
+    transform:translateY(30px);
+    transition:opacity .8s ease,transform .8s ease;
+}
+
+.reveal.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    .hero{
+        padding-top:120px;
+    }
+
+    .hero-grid,
+    .business-grid,
+    .pricing-grid{
+        grid-template-columns:1fr;
+    }
+
+    .visual{
+        min-height:420px;
+        order:-1;
+    }
+
+    .problem-grid,
+    .steps{
+        grid-template-columns:1fr;
+    }
+
+    .for-grid{
+        grid-template-columns:1fr;
+    }
+
+    .process{
+        grid-template-columns:1fr 1fr;
+    }
+
+    h1{
+        letter-spacing:-2.5px;
+    }
+
+    .business{
+        padding:30px 22px;
+    }
+
+    .business-features{
+        grid-template-columns:1fr;
+    }
+
+    .phone{
+        width:210px;
+        height:395px;
+    }
+
+    .tap-card{
+        width:185px;
+        left:2%;
+    }
+
+    .footer-inner{
+        flex-direction:column;
+    }
+
+}
+
+@media(max-width:430px){
+
+    .nav-btn{
+        display:none;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .process{
+        grid-template-columns:1fr;
+    }
+
+    .price{
+        font-size:40px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+<div class="container nav-inner">
+
+    <a href="#" class="logo">
+        <div class="logo-icon">T</div>
+        <span>Tap<b>2</b>Review</span>
+    </a>
+
+    <a href="#order" class="nav-btn">Get Your Card →</a>
+
+</div>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero">
+
+<div class="container hero-grid">
+
+    <div class="reveal">
+
+        <div class="badge">
+            <span class="dot"></span>
+            NFC Review Solutions for Pakistani Businesses
+        </div>
+
+        <h1>
+            Turn happy customers
+            into <span class="gradient-text">Google reviews.</span>
+        </h1>
+
+        <p>
+            Give your customers a faster way to leave feedback.
+            One simple tap can take them directly where you want them to go.
+        </p>
+
+        <div class="buttons">
+            <a href="#pricing" class="btn btn-red">
+                View Cards →
+            </a>
+
+            <a href="#business" class="btn btn-outline">
+                Start Your Own Business
+            </a>
+        </div>
+
+    </div>
+
+
+    <div class="visual reveal">
+
+        <div class="tap-card">
+            <h3>Tap2Review</h3>
+            <p>Tap. Review. Grow.</p>
+            <br>
+            <span>★★★★★</span>
+        </div>
+
+        <div class="phone">
+
+            <div class="phone-top"></div>
+
+            <div class="screen">
+
+                <div class="google">
+                    <span style="color:#4285F4">G</span>
+                    <span style="color:#EA4335">o</span>
+                    <span style="color:#FBBC05">o</span>
+                    <span style="color:#4285F4">g</span>
+                    <span style="color:#34A853">l</span>
+                    <span style="color:#EA4335">e</span>
+                </div>
+
+                <div class="stars">★★★★★</div>
+
+                <div class="review-box">
+                    <small>Share your experience</small>
+                    <h3>Leave a Review</h3>
+                    <p style="color:#777;font-size:12px;margin-top:8px;">
+                        Your feedback helps this business grow.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</section>
+
+
+<div class="trust">
+    <div class="container">
+        Built for local businesses • Pakistan-wide delivery 🇵🇰
+    </div>
+</div>
+
+
+<!-- PROBLEM -->
+<section>
+
+<div class="container">
+
+    <div class="section-label">THE PROBLEM</div>
+
+    <h2 class="section-title">
+        Great service doesn't always mean great reviews.
+    </h2>
+
+    <p class="section-subtitle">
+        Customers may love a business but still forget to leave feedback.
+        The easier you make the process, the more likely they are to do it.
+    </p>
+
+
+    <div class="problem-grid">
+
+        <div class="card reveal">
+            <div class="card-icon">😶</div>
+            <h3>Customers forget</h3>
+            <p>
+                A customer can have a great experience and simply walk away
+                without leaving a review.
+            </p>
+        </div>
+
+        <div class="card reveal">
+            <div class="card-icon">🔗</div>
+            <h3>Too many steps</h3>
+            <p>
+                Searching for a business and finding the correct review page
+                creates unnecessary friction.
+            </p>
+        </div>
+
+        <div class="card reveal">
+            <div class="card-icon">⭐</div>
+            <h3>Reviews build trust</h3>
+            <p>
+                Fresh customer feedback can help potential customers feel more
+                confident about choosing a business.
+            </p>
+        </div>
+
+    </div>
+
+</div>
+</section>
+
+
+<!-- HOW IT WORKS -->
+<section>
+
+<div class="container">
+
+    <div class="section-label">HOW IT WORKS</div>
+
+    <h2 class="section-title">
+        Three simple steps.
+    </h2>
+
+    <p class="section-subtitle">
+        No complicated process for the customer.
+    </p>
+
+
+    <div class="steps">
+
+        <div class="card reveal">
+            <div class="step-number">01 / TAP</div>
+            <h3>Customer taps</h3>
+            <p>
+                They tap their phone on the NFC card.
+            </p>
+        </div>
+
+        <div class="card reveal">
+            <div class="step-number">02 / OPEN</div>
+            <h3>Review page opens</h3>
+            <p>
+                The card takes them to the configured destination.
+            </p>
+        </div>
+
+        <div class="card reveal">
+            <div class="step-number">03 / GROW</div>
+            <h3>Customer responds</h3>
+            <p>
+                The easier process gives customers a convenient way to share
+                their experience.
+            </p>
+        </div>
+
+    </div>
+
+</div>
+</section>
+
+
+<!-- FOR YOU -->
+<section>
+
+<div class="container">
+
+    <div class="section-label">WHO IS THIS FOR?</div>
+
+    <h2 class="section-title">
+        Is Tap2Review right for you?
+    </h2>
+
+    <div class="for-grid">
+
+        <div class="for-box good reveal">
+
+            <h3>Perfect if you...</h3>
+
+            <ul>
+                <li>Own a local business</li>
+                <li>Want a simpler review process</li>
+                <li>Care about your online reputation</li>
+                <li>Want a professional customer experience</li>
+                <li>Want to make your business easier to find</li>
+            </ul>
+
+        </div>
+
+        <div class="for-box reveal">
+
+            <h3>Probably not if you...</h3>
+
+            <ul>
+                <li>Don't want customers to leave feedback</li>
+                <li>Don't care about your online presence</li>
+                <li>Want complicated technology</li>
+                <li>Expect a card to magically create reviews</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>
+</section>
+
+
+<!-- PRICING -->
+<section id="pricing">
+
+<div class="container">
+
+    <div class="section-label">GET STARTED</div>
+
+    <h2 class="section-title">
+        Simple pricing. No complicated plans.
+    </h2>
+
+    <p class="section-subtitle">
+        Start with one card or equip multiple locations and teams.
+    </p>
+
+
+    <div class="pricing-grid">
+
+        <!-- SINGLE -->
+        <div class="price-card reveal">
+
+            <h3>Tap2Review Card</h3>
+
+            <div class="price">
+                Rs. 2,350
+                <small>/ card</small>
+            </div>
+
+            <p>
+                Perfect for businesses that want to start with one card.
+            </p>
+
+            <ul class="features">
+                <li>NFC review card</li>
+                <li>Professional presentation</li>
+                <li>Configured for your business</li>
+                <li>Pakistan-wide delivery</li>
+            </ul>
+
+            <a href="#order" class="btn btn-outline" style="width:100%;">
+                Order a Card
+            </a>
+
+        </div>
+
+
+        <!-- BULK -->
+        <div class="price-card featured reveal">
+
+            <div class="popular">BEST FOR BUSINESSES</div>
+
+            <h3>Business Pack</h3>
+
+            <div class="price">
+                Rs. 1,950
+                <small>/ card</small>
+            </div>
+
+            <p>
+                Order 3 or more cards and get the lower per-card price.
+            </p>
+
+            <ul class="features">
+                <li>3+ cards</li>
+                <li>Better per-card pricing</li>
+                <li>Great for multiple counters</li>
+                <li>Pakistan-wide delivery</li>
+            </ul>
+
+            <a href="#order" class="btn btn-red" style="width:100%;">
+                Order Business Pack
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+</section>
+
+
+<!-- START YOUR OWN BUSINESS -->
+<section id="business">
+
+<div class="container">
+
+    <div class="business reveal">
+
+        <div class="business-grid">
+
+            <div>
+
+                <div class="section-label">
+                    START YOUR OWN BUSINESS
+                </div>
+
+                <h2>
+                    Don't just use the system.<br>
+                    <span class="gradient-text">Build a business around it.</span>
+                </h2>
+
+                <p>
+                    Learn how to find potential clients, present the offer,
+                    sell NFC solutions, add valuable services and organize
+                    your operation from the beginning.
+                </p>
+
+                <br>
+
+                <div class="price">
+                    Rs. 5,999
+                </div>
+
+                <small style="color:#777;">
+                    Complete starter business package
+                </small>
+
+                <br><br>
+
+                <a href="#order" class="btn btn-red">
+                    Get Started →
+                </a>
+
+            </div>
+
+
+            <div class="business-features">
+
+                <div class="business-feature">
+                    <span>✓</span>
+                    Beginner business blueprint
+                </div>
+
+                <div class="business-feature">
+                    <span>✓</span>
+                    Advanced growth blueprint
+                </div>
+
+                <div class="business-feature">
+                    <span>✓</span>
+                    Client outreach system
+                </div>
+
+                <div class="business-feature">
+                    <span>✓</span>
+                    Card setup guidance
+                </div>
+
+                <div class="business-feature">
+                    <span>✓</span>
+                    Pricing & sales strategy
+                </div>
+
+                <div class="business-feature">
+                    <span>✓</span>
+                    Additional service ideas
+                </div>
+
+                <div class="business-feature">
+                    <span>✓</span>
+                    Target client guide
+                </div>
+
+                <div class="business-feature">
+                    <span>✓</span>
+                    Sales tracking system
+                </div>
+
+                <div class="business-feature">
+                    <span>✓</span>
+                    Mistakes & obstacles guide
+                </div>
+
+                <div class="business-feature">
+                    <span>✓</span>
+                    SOPs & checklists
+                </div>
+
+                <div class="business-feature">
+                    <span>✓</span>
+                    Scaling roadmap
+                </div>
+
+                <div class="business-feature">
+                    <span>✓</span>
+                    Google Business Profile guidance
+                </div>
+
+                <div class="business-feature">
+                    <span>✓</span>
+                    Private coaching
+                </div>
+
+                <div class="business-feature">
+                    <span>✓</span>
+                    Direct business resources
+                </div>
+
+                <div class="business-feature">
+                    <span>✓</span>
+                    5 Premium NFC Cards
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</section>
+
+
+<!-- DELIVERY PROCESS -->
+<section>
+
+<div class="container">
+
+    <div class="section-label">THE PROCESS</div>
+
+    <h2 class="section-title">
+        From order to delivery.
+    </h2>
+
+    <p class="section-subtitle">
+        A simple process keeps everything clear.
+    </p>
+
+
+    <div class="process">
+
+        <div class="process-item">
+            🛒
+            <strong>Order</strong>
+            <small>Choose your package</small>
+        </div>
+
+        <div class="process-item">
+            💳
+            <strong>Pay</strong>
+            <small>Use available payment methods</small>
+        </div>
+
+        <div class="process-item">
+            📸
+            <strong>Confirm</strong>
+            <small>Send payment proof</small>
+        </div>
+
+        <div class="process-item">
+            ⚙️
+            <strong>Setup</strong>
+            <small>We prepare your order</small>
+        </div>
+
+        <div class="process-item">
+            🚚
+            <strong>Delivery</strong>
+            <small>Pakistan-wide</small>
+        </div>
+
+    </div>
+
+</div>
+</section>
+
+
+<!-- FAQ -->
+<section>
+
+<div class="container">
+
+    <div class="section-label">FAQ</div>
+
+    <h2 class="section-title">
+        Questions?
+    </h2>
+
+    <div class="faq">
+
+        <details>
+            <summary>What is Tap2Review?</summary>
+            <p>
+                Tap2Review provides NFC-based review solutions that make it
+                easier for customers to reach a business's chosen destination.
+            </p>
+        </details>
+
+        <details>
+            <summary>Do I need an app?</summary>
+            <p>
+                Customers generally don't need to install a special Tap2Review
+                app to use an NFC card.
+            </p>
+        </details>
+
+        <details>
+            <summary>Do you deliver outside Islamabad?</summary>
+            <p>
+                Yes. Tap2Review offers Pakistan-wide delivery.
+            </p>
+        </details>
+
+        <details>
+            <summary>Can I order multiple cards?</summary>
+            <p>
+                Yes. Orders of 3 or more cards receive the business-pack
+                per-card price.
+            </p>
+        </details>
+
+        <details>
+            <summary>What is the Start Your Own Business package?</summary>
+            <p>
+                It is an educational and practical starter package for people
+                who want to build a business around NFC review solutions.
+            </p>
+        </details>
+
+        <details>
+            <summary>Does Tap2Review guarantee reviews or income?</summary>
+            <p>
+                No. The card makes the customer journey easier, but reviews,
+                sales and business results depend on customers, execution and
+                the individual business.
+            </p>
+        </details>
+
+    </div>
+
+</div>
+</section>
+
+
+<!-- ORDER -->
+<section id="order">
+
+<div class="container">
+
+    <div class="section-label">ORDER</div>
+
+    <h2 class="section-title">
+        Ready to get started?
+    </h2>
+
+    <p class="section-subtitle">
+        Fill in your details and contact us on WhatsApp to confirm your order.
+    </p>
+
+
+    <div class="order">
+
+        <div class="order-box">
+
+            <div class="form-group">
+                <label>Your Name</label>
+                <input id="name" type="text" placeholder="Enter your name">
+            </div>
+
+            <div class="form-group">
+                <label>Business Name</label>
+                <input id="businessName" type="text" placeholder="Enter business name">
+            </div>
+
+            <div class="form-group">
+                <label>Phone / WhatsApp</label>
+                <input id="phone" type="tel" placeholder="03XXXXXXXXX">
+            </div>
+
+            <div class="form-group">
+                <label>What do you want?</label>
+
+                <select id="product">
+                    <option>One Tap2Review Card — Rs. 2,350</option>
+                    <option>Business Pack — 3+ Cards — Rs. 1,950/card</option>
+                    <option>Start Your Own Business Package — Rs. 5,999</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Delivery Address</label>
+                <textarea id="address" rows="3" placeholder="Complete delivery address"></textarea>
+            </div>
+
+
+            <div class="payment">
+
+                <strong>Payment Methods</strong>
+
+                <p>
+                    Easypaisa: <b style="color:#fff;">0315 5048373</b>
+                </p>
+
+                <p>
+                    Bank: <b style="color:#fff;">CDNS / National Savings</b>
+                </p>
+
+                <p>
+                    Account Title: <b style="color:#fff;">Manzoor Malik</b>
+                </p>
+
+                <p>
+                    Account Number: <b style="color:#fff;">133100100103782</b>
+                </p>
+
+                <p>
+                    IBAN: <b style="color:#fff;">PK65CDNS0133100100103782</b>
+                </p>
+
+                <br>
+
+                <small style="color:#777;">
+                    After payment, send your payment screenshot through WhatsApp
+                    to confirm your order.
+                </small>
+
+            </div>
+
+
+            <button onclick="sendWhatsApp()" class="btn btn-red" style="width:100%;">
+                Continue on WhatsApp →
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+</section>
+
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+
+<div class="container">
+
+    <div class="section-label">TAP2REVIEW</div>
+
+    <h2>
+        Tap.<br>
+        Review.<br>
+        <span class="gradient-text">Grow.</span>
+    </h2>
+
+    <p>
+        Give customers an easier way to share their experience —
+        and give yourself a smarter way to build your business.
+    </p>
+
+    <div class="buttons" style="justify-content:center;">
+
+        <a href="#pricing" class="btn btn-red">
+            Get Your Card
+        </a>
+
+        <a href="#business" class="btn btn-outline">
+            Start Your Own Business
+        </a>
+
+    </div>
+
+</div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+<div class="container footer-inner">
+
+    <div>
+        © 2026 Tap2Review. All rights reserved.
+    </div>
+
+    <div>
+        Pakistan-wide 🇵🇰 • Tap2Review
+    </div>
+
+</div>
+
+</footer>
+
+
+<!-- WHATSAPP -->
+<a
+href="https://wa.me/923155048373"
+class="whatsapp"
+target="_blank"
+aria-label="WhatsApp">
+    💬
+</a>
+
+
+<script>
+
+/* =========================
+   SCROLL REVEAL ANIMATION
+   ========================= */
+
+const observer = new IntersectionObserver(
+    entries => {
+
+        entries.forEach(entry => {
+
+            if(entry.isIntersecting){
+                entry.target.classList.add("show");
+            }
+
+        });
+
+    },
+    {
+        threshold:0.12
+    }
+);
+
+document.querySelectorAll(".reveal").forEach(el => {
+    observer.observe(el);
+});
+
+
+/* =========================
+   WHATSAPP ORDER SYSTEM
+   ========================= */
+
+function sendWhatsApp(){
+
+    const name =
+        document.getElementById("name").value.trim();
+
+    const business =
+        document.getElementById("businessName").value.trim();
+
+    const phone =
+        document.getElementById("phone").value.trim();
+
+    const product =
+        document.getElementById("product").value;
+
+    const address =
+        document.getElementById("address").value.trim();
+
+
+    if(!name || !phone || !address){
+
+        alert("Please fill in your name, WhatsApp number and delivery address.");
+
+        return;
+    }
+
+
+    const message =
+`Hello Tap2Review 👋
+
+I want to place an order.
+
+Name: ${name}
+Business: ${business || "N/A"}
+My WhatsApp: ${phone}
+
+Product:
+${product}
+
+Delivery Address:
+${address}
+
+I will send my payment screenshot here after payment.`;
+
+    
+    const url =
+        "https://wa.me/923155048373?text=" +
+        encodeURIComponent(message);
+
+
+    window.open(url,"_blank");
+
+}
+
+</script>
+
+</body>
+</html>
